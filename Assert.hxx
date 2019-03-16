@@ -6,14 +6,15 @@
 namespace the5 {
 namespace util {
 
-/* Passes a message and file and line to assert.
+/* Modified Assert that uses __debugbreak() rather than abort().
+** Allows passing a printf like statement.
 */
-#define ASSERT(condition, msg, ...) if (!(condition)) { printf("Assertion failed: %s " msg "\nIn file %s line %u\n", #condition, __VA_ARGS__, __FILE__, __LINE__); abort(); }
 
-
-/*
-#define ASSERT(condition, msg, ...) printf("ASSERT!: " msg "\nIn file %s line %u\n", __VA_ARGS__ , __FILE__, __LINE__); assert(condition); 
-*/
+#ifdef NDEBUG
+#	define ASSERT(condition, msg, ...) ((void)0)
+#else
+#	define ASSERT(condition, msg, ...) if (!(condition)) { printf("Assertion failed: %s " msg "\nIn file %s line %u\n", #condition, __VA_ARGS__, __FILE__, __LINE__); __debugbreak(); }
+#endif
 
 }
 }
