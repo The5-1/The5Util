@@ -4,6 +4,20 @@ namespace the5 {
 namespace util {	
 namespace file {	
     
+	static std::string getDirectory(const std::string filepath)
+	{
+		std::string directory = filepath.substr(0, filepath.find_last_of('/'));
+		return directory;
+	}
+
+	static std::string getFileName(const std::string filepath)
+	{
+		auto dirLength = filepath.find_last_of('/');
+		auto pathlength = filepath.length();
+		std::string fileName = filepath.substr(dirLength, pathlength - dirLength);
+		return fileName;
+	}
+
     static std::string getPathMistakes(const std::string &filepath)
 	{
 		std::string warning("");
