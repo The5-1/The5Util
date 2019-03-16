@@ -1,5 +1,5 @@
 # The5 Utility Headers
 Assorted utility functions.
 
-# CMake
+## CMake
 Simply use `include_directories(path/to/The5Util)`.

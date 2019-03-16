@@ -11,8 +11,6 @@ namespace util {
 
 #define LOG(msg, ...) printf(msg "\nIn file %s line %u\n", __VA_ARGS__ , __FILE__, __LINE__);
 
-
-
 /*
 //old implementation
 //https://stackoverflow.com/questions/4053837/colorizing-text-in-the-console-with-c
