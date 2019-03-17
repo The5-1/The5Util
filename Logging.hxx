@@ -9,7 +9,7 @@ namespace logging {
 
 /* User Options */
 #ifndef LOG_MIN_LEVEL
-#	define LOG_MIN_LEVEL 4
+#	define LOG_MIN_LEVEL 0
 #endif
 
 #ifndef LOG_SHOW_LINE_NUMBER
