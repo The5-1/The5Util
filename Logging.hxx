@@ -7,16 +7,15 @@
 namespace the5 {
 namespace logging {
 
-/* User Options
-** Do not re-define if user defined them elsewhere
-*/
+/* User Options */
 #ifndef LOG_MIN_LEVEL
-#	define LOG_MIN_LEVEL 0
-#endif// !LOG_MIN_LEVEL
+#	define LOG_MIN_LEVEL 4
+#endif
 
 #ifndef LOG_SHOW_LINE_NUMBER
 #	define LOG_SHOW_LINE_NUMBER 1
-#endif // !LOG_SHOW_LINE_NUMBER
+#endif
+
 
 #if LOG_SHOW_LINE_NUMBER > 0
 #	define LOG_FILE_AND_LINE_FORMAT "\n\tIn file %s line %u\n"
@@ -55,26 +54,38 @@ namespace logging {
 */
 #if 0 >= LOG_MIN_LEVEL
 #	define TRACE(msg, ...) the5::logging::Log_(the5::logging::Level::Trace, msg LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ LOG_FILE_AND_LINE_PARAMS);
+#else
+#	define TRACE(msg, ...) ((void)0)
 #endif
 
 #if 1 >= LOG_MIN_LEVEL 
 #	define LOG(msg, ...) the5::logging::Log_(the5::logging::Level::Debug, msg LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ LOG_FILE_AND_LINE_PARAMS);
+#else
+#	define LOG(msg, ...) ((void)0)
 #endif
 
 #if 2 >= LOG_MIN_LEVEL 
 #	define INFO(msg, ...) the5::logging::Log_(the5::logging::Level::Info, msg LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ LOG_FILE_AND_LINE_PARAMS);
+#else
+#	define INFO(msg, ...) ((void)0)
 #endif
 
 #if 3 >= LOG_MIN_LEVEL 
-#define WARNING(msg, ...) the5::logging::Log_(the5::logging::Level::Warning, msg LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ LOG_FILE_AND_LINE_PARAMS);
+#	define WARNING(msg, ...) the5::logging::Log_(the5::logging::Level::Warning, msg LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ LOG_FILE_AND_LINE_PARAMS);
+#else
+#	define WARNING(msg, ...) ((void)0)
 #endif
 
 #if 4 >= LOG_MIN_LEVEL 
 #	define ERROR(msg, ...) the5::logging::Log_(the5::logging::Level::Error, msg LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ LOG_FILE_AND_LINE_PARAMS);
+#else
+#	define ERROR(msg, ...) ((void)0)
 #endif
 
 #if 5 >= LOG_MIN_LEVEL && !defined(NDEBUG)
 #	define ASSERT(condition, msg, ...) if(!(condition)){the5::logging::Log_(the5::logging::Level::Assert, msg "\n\tAssertion Failed: %s" LOG_FILE_AND_LINE_FORMAT, __VA_ARGS__ , #condition LOG_FILE_AND_LINE_PARAMS);__debugbreak();}
+#else
+#	define ASSERT(condition, msg, ...) ((void)0)
 #endif
 
 }
